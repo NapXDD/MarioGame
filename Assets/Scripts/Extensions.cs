@@ -3,7 +3,7 @@ using UnityEngine;
 public static class Extensions
 {
     private static LayerMask layerMask = LayerMask.GetMask("Default");
-    public static bool Raycast(this Rigidbody2D rigidBody, Vector2 direction) 
+    public static bool Raycast(this Rigidbody2D rigidBody, Vector2 direction)
     {
         if (rigidBody.isKinematic)
         {

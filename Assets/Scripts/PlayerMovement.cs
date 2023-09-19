@@ -11,10 +11,10 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 8f;
     public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
-    public float jumpForce => (2f*maxJumpHeight) / (maxJumpTime / 2f);
+    public float jumpForce => (2f * maxJumpHeight) / (maxJumpTime / 2f);
     public float gravity => (-2f * maxJumpHeight) / Mathf.Pow(maxJumpTime / 2f, 2f);
 
-    public bool grounded {  get; private set; }
+    public bool grounded { get; private set; }
     public bool jumping { get; private set; }
     public bool running => Mathf.Abs(velocity.x) > 0.25f || Mathf.Abs(inputAxis) > 0.25f;
     public bool sliding => (inputAxis > 0f && velocity.x < 0f) || (inputAxis < 0f && velocity.x > 0f);
@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
         grounded = rigidBody.Raycast(Vector2.down);
 
-        if(grounded)
+        if (grounded)
         {
             GroundedMovement();
         }
@@ -64,15 +64,16 @@ public class PlayerMovement : MonoBehaviour
         inputAxis = Input.GetAxis("Horizontal");
         velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
 
-        if(rigidBody.Raycast(Vector2.right * velocity.x))
+        if (rigidBody.Raycast(Vector2.right * velocity.x))
         {
             velocity.x = 0f;
         }
 
-        if(velocity.x > 0f)
+        if (velocity.x > 0f)
         {
             transform.eulerAngles = Vector3.zero;
-        } else if (velocity.x < 0f)
+        }
+        else if (velocity.x < 0f)
         {
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
         }
@@ -92,9 +93,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer != LayerMask.NameToLayer("PowerUp"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            if(transform.DotTest(collision.transform, Vector2.up))
+            if (transform.DotTest(collision.transform, Vector2.down))
+            {
+                velocity.y = jumpForce / 2f;
+                jumping = true;
+            }
+        }
+        if (collision.gameObject.layer != LayerMask.NameToLayer("PowerUp"))
+        {
+            if (transform.DotTest(collision.transform, Vector2.up))
             {
                 velocity.y = 0;
             }
