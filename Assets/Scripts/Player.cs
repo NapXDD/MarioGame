@@ -4,6 +4,7 @@ public class Player : MonoBehaviour
 {
     public PlayerSpriteRender smallRenderer;
     public PlayerSpriteRender bigRenderer;
+    public Player Instance { get; private set; }
 
     public DeadAnimation deadAnimation { get; private set; }
 
