@@ -30,7 +30,9 @@ public class Goomba : MonoBehaviour
 
     private void Hit()
     {
-
+        GetComponent<AnimatedSprite>().enabled = false;
+        GetComponent<DeadAnimation>().enabled = true;
+        Destroy(gameObject, 0.5f);
     }
 
     private void Flatten()

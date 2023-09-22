@@ -39,6 +39,10 @@ public class Koopa : MonoBehaviour
                 player.Hit();
             }
         }
+        else if (!shelled && other.gameObject.layer == LayerMask.NameToLayer("Shell"))
+        {
+            Hit();
+        }
     }
 
     private void PushShell(Vector2 direction)
@@ -62,4 +66,20 @@ public class Koopa : MonoBehaviour
         GetComponent<EntityMovement>().enabled = false;
         GetComponent<AnimatedSprite>().enabled = false;
     }
+
+    private void Hit()
+    {
+        GetComponent<AnimatedSprite>().enabled = false;
+        GetComponent<DeadAnimation>().enabled = true;
+        Destroy(gameObject, 0.5f);
+    }
+
+    private void OnBecameInvisible()
+    {
+        if (pushed)
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }
