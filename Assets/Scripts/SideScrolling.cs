@@ -23,6 +23,14 @@ public class SideScrolling : MonoBehaviour
     {
         Vector3 cameraPosition = transform.position;
         cameraPosition.y = underground ? undergroundHeight : height;
+        if (underground)
+        {
+            cameraPosition.y = undergroundHeight
+        }
+        else
+        {
+
+        }
         transform.position = cameraPosition;
     }
 }
