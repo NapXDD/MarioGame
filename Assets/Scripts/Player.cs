@@ -96,8 +96,7 @@ public class Player : MonoBehaviour
 
     public void StarPower(float duration = 10f)
     {
-        StartCoroutine(StarpowerAnimation());
-
+        StartCoroutine(StarpowerAnimation(duration));
     }
 
     private IEnumerator StarpowerAnimation(float duration)
