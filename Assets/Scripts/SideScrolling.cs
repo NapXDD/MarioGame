@@ -25,11 +25,11 @@ public class SideScrolling : MonoBehaviour
         cameraPosition.y = underground ? undergroundHeight : height;
         if (underground)
         {
-            cameraPosition.y = undergroundHeight
+            cameraPosition.y = undergroundHeight;
         }
         else
         {
-
+            cameraPosition.y = height;
         }
         transform.position = cameraPosition;
     }
